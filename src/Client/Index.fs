@@ -6,7 +6,8 @@ open Shared
 
 type Model =
     { Todos: Todo list
-      Input: string }
+      Input: string 
+      Galaxy: Galaxy }
 
 type Msg =
     | GotTodos of Todo list
@@ -22,7 +23,9 @@ let todosApi =
 let init(): Model * Cmd<Msg> =
     let model =
         { Todos = []
-          Input = "" }
+          Input = "" 
+          Galaxy = Galaxy.init ()
+          }
     let cmd = Cmd.OfAsync.perform todosApi.getTodos () GotTodos
     model, cmd
 
@@ -54,7 +57,12 @@ let navBrand =
                 Alt "Logo"
             ]
         ]
-    ]
+        Navbar.Item.a [
+            Navbar.Item.IsActive true
+        ] [
+            str "Say this thing"
+        ]
+    ]   
 
 let containerBox (model : Model) (dispatch : Msg -> unit) =
     Box.box' [ ] [
@@ -65,6 +73,10 @@ let containerBox (model : Model) (dispatch : Msg -> unit) =
             ]
         ]
         Field.div [ Field.IsGrouped ] [
+            h2 [] [
+                str "Paperclips: "
+
+            ]
             Control.p [ Control.IsExpanded ] [
                 Input.text [
                   Input.Value model.Input
