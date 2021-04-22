@@ -14,7 +14,6 @@ type Business = {
     Funds: decimal<usdollar>
     Inventory: bigint
     Price: decimal<usdollar>
-    Demand: decimal
     Marketing: Marketing
     
 }
@@ -32,6 +31,7 @@ type Manufacturing = {
 type Galaxy = {
     Business: Business
     Manufacturing: Manufacturing
+    Demand: decimal
 }
 
 
